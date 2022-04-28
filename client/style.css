@@ -43,3 +43,25 @@
 .test {
   background-color: red;
 }
+
+.all {
+  padding: .2rem,
+  display: none;
+}
+
+.pendingReview {
+  padding: .2rem
+}
+
+.goals {
+  padding: .2rem
+}
+
+.resolved {
+  padding: .2rem
+}
+
+.inProgress {
+  padding: .2rem
+}
+

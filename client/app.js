@@ -5,7 +5,7 @@ const issuesDB = [
     issue: 'Submit button not working',
     type: 'bug', // bug, suggestion, other
     details: 'When I try and create a new context the button does not seem to click. and nothing happens.',
-    status: 'pending review', // pending review, In Progress, Resolved, Goals
+    status: 'pendingReview', // pending review, In Progress, Resolved, Goals
     priority: 'high', // low, med, high
     assigned_to: 'Patrick',
     created_at: '4-26-2022',
@@ -16,7 +16,7 @@ const issuesDB = [
     issue: 'I want fireworks when I complete all my tasks',
     type: 'suggestion', // bug, suggestion, other
     details: 'I think that would be super motivating.',
-    status: 'Goals', //pending review, In Progress, Resolved, Goals
+    status: 'goals', //pending review, In Progress, Resolved, Goals
     priority: 'Low', // low, med, high
     assigned_to: 'Patrick',
     created_at: '4-26-2022',
@@ -27,7 +27,7 @@ const issuesDB = [
     issue: 'Why does it tell me I drink too much?',
     type: 'other', // bug, suggestion, other
     details: 'It just keeps telling me I\'m and alcoholic!',
-    status: 'in progress', //pending review, In Progress, Resolved, Goals
+    status: 'inProgress', //pending review, In Progress, Resolved, Goals
     priority: 'med', // low, med, high
     assigned_to: 'Patrick',
     created_at: '4-26-2022',
@@ -38,7 +38,7 @@ const issuesDB = [
     issue: 'guns',
     type: 'suggestion', // bug, suggestion, other
     details: 'needs more guns',
-    status: 'pending review', //pending review, In Progress, Resolved, Goals
+    status: 'pendingReview', //pending review, In Progress, Resolved, Goals
     priority: 'med', // low, med, high
     assigned_to: 'Patrick',
     created_at: '4-26-2022',
@@ -223,6 +223,15 @@ for (const [key, value] of Object.entries(statusBtn)){
     class: `button`,
   }
   setAttributes(button, buttonAttr);
+  const btnToggle = document.querySelector(`.${key}`);
+  button.addEventListener('click', () => {
+    if (key == 'all'){
+    showIssues()
+    } else {
+      const pr = document.querySelector(document.querySelector)
+      showIssues()
+    }
+  })
   resultsHeader.append(button)
 };
 
@@ -230,6 +239,7 @@ for (const [key, value] of Object.entries(statusBtn)){
 // display issues
 
 //All
+function showIssues (showOnly) {
 issuesDB.map(item => {
 // Individual wrapper
   const resultsContainer = createElement({
@@ -237,7 +247,7 @@ issuesDB.map(item => {
     // innerText: 'results container',
   });
   const resultsContainerAttr = {
-    class: `results-container ${item.type}`
+    class: `results-container ${item.status}`
   }
   setAttributes(resultsContainer, resultsContainerAttr);
   main.append(resultsContainer)
@@ -245,7 +255,7 @@ issuesDB.map(item => {
 //Header  
   const header = createElement({
     Tag: 'div',
-    innerText: `${item.created_by} submitted a ticket for a(n) ${item.type}`,
+    innerText: `${item.created_by} submitted a ticket for a(n) ${statusBtn[item.type]}`,
   })
   const headerAttr = {
     class: `header`,
@@ -283,13 +293,13 @@ issuesDB.map(item => {
     innerText: `submitted on: ${item.created_at},  assigned to: ${item.assigned_to}, priority: ${item.priority}, status: ${item.status}`
   })
   const footerAttr = {
-    class: `footer ${item.type}`,
+    class: `footer`,
   }
   setAttributes(footer, footerAttr);
   resultsContainer.append(footer)
   
 })
-
+}
 
 //     id: 1,
 //     issue: 'Submit button not working',
