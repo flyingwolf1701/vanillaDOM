@@ -104,23 +104,24 @@ const titleAttr = {
 setAttributes(title, titleAttr)
 form.append(title)
 
-//select
-const select = document.createElement('select');
-const selectAttr = {
+//select type
+
+const selectIssue = document.createElement('select');
+const selectIssueAttr = {
   name: 'issue'
 }
-setAttributes(select, selectAttr)
-form.append(select)
+setAttributes(selectIssue, selectIssueAttr)
+form.append(selectIssue)
 
 const options = (issue) => {
-  const option = document.createElement('option');
-  option.innerText = issue;
+  const option1 = document.createElement('option');
+  option1.innerText = issue;
   const optionAttr = {
-    value: `${issue} test`,
+    value: issue,
 
   }
-  setAttributes(option, optionAttr)
-  select.append(option)
+  setAttributes(option1, optionAttr)
+  selectIssue.append(option1)
 }
 
 const optionsArray = ['Bug', 'Suggestion', 'Other'];
@@ -142,6 +143,42 @@ const textFieldAttr = {
 setAttributes(textField, textFieldAttr);
 form.append(textField);
 
+//Select Priority
+
+const priority = document.createElement('select');
+const priorityAttr = {
+  name: 'priority',
+}
+setAttributes(priority, priorityAttr)
+form.append(priority)
+
+const priorityOptions = (val, inner) => {
+  const priorityOption = document.createElement('option');
+  priorityOption.innerText = inner;
+  const priorityOptionAttr = {
+    value: `${val}`,
+
+  }
+  setAttributes(priorityOption, priorityOptionAttr)
+  priority.append(priorityOption)
+}
+
+const priorityOptionsArray = {
+  '': '--Priority--',
+  bug: 'Bug',
+  suggestion: 'Suggestion',
+  other: 'Other',
+};
+
+
+for (const [key, value] of Object.entries(priorityOptionsArray)) { 
+  priorityOptions(key, value);
+}
+
+
+
+//Submit button
+
 const button = document.createElement('button');
 button.innerText = 'submit'
 form.append(button);
@@ -153,63 +190,104 @@ form.append(button);
 const createElement = (initObj) => {
   const element = document.createElement(initObj.Tag);
   for (let prop in initObj){
-    if (prop === 'childNodes'){
-      initObj.childNodes.forEach((node) => {
-        element.appendChild(node)
-      });
-    } else if (prop === 'attributes'){
-      initObj.attributes.forEach((attr) => {
-        element.setAttribute(attr.key, attr.value)
-      });
-    } else {
-      element[prop] = initObj[prop];
-    }
+    element[prop] = initObj[prop];
   }
   return element;
 }
 
-const resultsContainer = createElement({
+const resultsHeader = createElement({
   Tag: 'div',
-  innerText: 'original',
-  attributes:
-    [
-      {key: 'class', value: 'results-container'},
-    ]
+  innerText: 'Status: ',
 });
-main.append(resultsContainer)
+const resultsHeaderAttr = {
+  class: 'results-header'
+}
+setAttributes(resultsHeader, resultsHeaderAttr);
+main.append(resultsHeader)
+
+// Buttons to show status
+const statusBtn = {
+  all: 'All', 
+  pendingReview: 'Pending Review', 
+  inProgress: 'In Progress', 
+  resolved: 'Resolved', 
+  goals: 'Goals',
+  }
+
+for (const [key, value] of Object.entries(statusBtn)){
+  const button = createElement({
+    Tag: 'button',
+    innerText: value,
+  })
+  const buttonAttr = {
+    class: `button`,
+  }
+  setAttributes(button, buttonAttr);
+  resultsHeader.append(button)
+};
+
 
 // display issues
 
 //All
 issuesDB.map(item => {
-  let element = item;
-  console.log(element)
+// Individual wrapper
+  const resultsContainer = createElement({
+    Tag: 'div',
+    // innerText: 'results container',
+  });
+  const resultsContainerAttr = {
+    class: `results-container ${item.type}`
+  }
+  setAttributes(resultsContainer, resultsContainerAttr);
+  main.append(resultsContainer)
+
 //Header  
   const header = createElement({
     Tag: 'div',
-    innerText: `${element.created_by} submitted a ticket for a ${item.type}`,
-    // const titleAttr = {
-    //   placeholder: 'What is the issue?',
-    //   type: 'text',
-    //   class: 'form'
-    // }
-    // setAttributes(title, titleAttr)
-    // attributes:[
-    //   {key: 'class', value: `results`}, 
-    //   // {id: 'class', value: item.type}
-    // ],
-
+    innerText: `${item.created_by} submitted a ticket for a(n) ${item.type}`,
   })
-//Subject line  
-const subjectLine = createElement({
-  Tag: 'div',
-  innerText: `${item.created_by} submitted a ticket for a ${item.type}`,
-  attributes:[
-    {key: 'class', value: 'results'}
-  ],
-})
-  
+  const headerAttr = {
+    class: `header`,
+  }
+  setAttributes(header, headerAttr);
   resultsContainer.append(header)
+
+//Subject line  
+  const subjectLine = createElement({
+    Tag: 'div',
+    innerText: `${item.issue}`,
+  })
+  const subjectLineAttr = {
+    class: `subject-line`,
+  }
+  setAttributes(subjectLine, subjectLineAttr);
+  resultsContainer.append(subjectLine)
+
+  //Body
+  const body = createElement({
+    Tag: 'div',
+    innerText: `${item.details}`,
+  })
+  const bodyAttr = {
+    class: `subject-line`,
+  }
+  setAttributes(body, bodyAttr);
+  resultsContainer.append(body)
+  
+  //Footer
+  // console.log(`submitted on: ${item.created_at}  assigned to: ${assigned_to} priority: ${priority}`)
+
+  const footer = createElement({
+    Tag: 'div',
+    innerText: `submitted on: ${item.created_at},  assigned to: ${item.assigned_to}, priority: ${item.priority}, status: ${item.status}`
+  })
+  const footerAttr = {
+    class: `footer ${item.type}`,
+  }
+  setAttributes(footer, footerAttr);
+  resultsContainer.append(footer)
+  
 })
 
 
