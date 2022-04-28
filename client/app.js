@@ -227,9 +227,12 @@ for (const [key, value] of Object.entries(statusBtn)){
   button.addEventListener('click', () => {
     if (key == 'all'){
     showIssues()
-    } else {
-      const pr = document.querySelector(document.querySelector)
-      showIssues()
+    // } else {
+    //   const pr = document.querySelector('.pendingReview')
+    //   const g = document.querySelector('.goals')
+    //   const r = document.querySelector('.resolved')
+    //   const ip = document.querySelector('.inProgress')
+    //   showIssues()
     }
   })
   resultsHeader.append(button)
