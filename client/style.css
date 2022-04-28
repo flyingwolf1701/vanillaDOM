@@ -5,8 +5,41 @@
 
 .main-container{
   display: flex;
+  flex-direction: column;
   border: 2px solid black;
   max-width: 800px;
-  min-height: 500px
   
+  
+}
+
+.nav-bar {
+  display: flex;
+  padding: 1rem;
+  border: 2px solid blue;
+  max-width: 700;
+  max-height: 10px;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: flex-start;
+  align-items: flex-start; */
+  border: 2px solid green;
+}
+
+.results-container {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid red;
+}
+
+.results{
+  /* display: flex; */
+  
+  border: 2px solid purple;
+}
+
+.test {
+  background-color: red;
 }
