@@ -1,4 +1,12 @@
-// 
+document.addEventListener('DOMContentLoaded', () => {
+  
+  // AJAX calls here:
+  
+
+
+
+
+//mock DB 
 const issuesDB = [
   {
     id: 1,
@@ -85,7 +93,7 @@ function setAttributes(element, attributes){
 // Form container
 const formContainer = document.createElement('div');
 const formContainerAttr = {
-  class: 'form-container',
+  class: 'form-container ',
 }
 setAttributes(formContainer, formContainerAttr)
 formContainer.innerText = 'Add issue or suggestion'
@@ -315,7 +323,7 @@ issuesDB.map(item => {
 //     created_by: 'Tim',
 
 
-
+})
 
 
 

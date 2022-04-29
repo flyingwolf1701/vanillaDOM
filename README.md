@@ -23,8 +23,16 @@ Goal: Build a rudamentary bug tracking app.
     - currently displays all
     - added buttons the are labeled by status
     * currently the buttons do not have functionality
-  7) cleaned up remaining issues with wireframe
+  7) cleaned up remaining issues with wireframe 4/28/22
     - The display of the page has reached my MVP
+    - spent too much time trying to figure out how to do thing that should be done on backend
+  8) started backend 4/28/22
+    - set up server, routes and controllers
+    - basic crud functionality working in postman
+    - set up mongo
+    - set up mongoose schema
+    - DB connected
+
 
 
 
